@@ -1,0 +1,24 @@
+# EditorConfig is awesome: https://editorconfig.org
+
+# Top-most EditorConfig file
+root = true
+
+# Unix-style newlines with a newline ending every file
+[*]
+end_of_line = lf
+insert_final_newline = true
+indent_style = space
+indent_size = 2
+
+# Matches multiple files with brace expansion notation
+[*.{js,jsx,ts,tsx,json}]
+charset = utf-8
+trim_trailing_whitespace = true
+
+# Ignore minified JavaScript files
+[**.min.js]
+indent_style = ignore
+
+# Denote filenames that should be used as they are without any conversion
+[*.{md,html,css,scss}]
+indent_style = unset
