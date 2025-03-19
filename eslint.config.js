@@ -1,8 +1,7 @@
+import pluginJs from '@eslint/js';
 import pluginReact from 'eslint-plugin-react';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
-
-import pluginJs from '@eslint/js';
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
@@ -13,21 +12,6 @@ export default [
   pluginReact.configs.flat.recommended,
   {
     rules: {
-      'prettier/prettier': [
-        'warn',
-        {
-          arrowParens: 'always',
-          semi: true,
-          trailingComma: 'all',
-          tabWidth: 2,
-          endOfLine: 'auto',
-          useTabs: false,
-          singleQuote: true,
-          printWidth: 120,
-          jsxSingleQuote: false,
-        },
-      ],
-      'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
       'react/react-in-jsx-scope': 'off',
       'no-console': 'off',
       '@typescript-eslint/no-unused-vars': 'warn',

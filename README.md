@@ -1,54 +1,115 @@
-# React + TypeScript + Vite
+# react-shadcn-tailwind-boilerplate
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**react-shadcn-tailwind-boilerplate** is a boilerplate that uses **React**, **Tailwind CSS**, **Shadcn UI** and comes pre-configured with various useful libraries such as `axios`, `react-hook-form`, `zustand`, `zod`, etc. The goal is to help you quickly initialize a frontend project with an easily extensible architecture, strict linting rules, and consistent code style.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- **React 19 + Vite**: Uses the latest version of React with Vite for faster development, build, and hot reload.
+- **Tailwind CSS**: Pre-configured with Tailwind CSS 4.x, allowing you to quickly and flexibly style your application.
+- **ShadCN**: Includes some configurations and components inspired by [shadcn/ui](https://ui.shadcn.com/).
+- **ESLint + Prettier**: Comes with ESLint and Prettier for standardized code style and to avoid syntax errors.
+- **Husky + lint-staged**: Automatically runs linting and formatting before committing, ensuring a clean codebase.
+- **axios**: A popular library for making API calls.
+- **react-hook-form**: Efficient and easy form management.
+- **zod**: Safe data parsing and validation.
+- **zustand**: Lightweight, straightforward global state management.
+- **React Router**: Routing for your application (version 7.x).
+- **Sonner**: A lightweight toast/notification library.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Technologies Used
+
+- [React](https://react.dev/) 19
+- [TypeScript](https://www.typescriptlang.org/) 5.x
+- [Vite](https://vitejs.dev/) 6.x
+- [Tailwind CSS](https://tailwindcss.com/) 4.x
+- [ESLint](https://eslint.org/) 9.x
+- [Prettier](https://prettier.io/) 3.x
+- [Husky](https://typicode.github.io/husky/#/) 9.x
+- [lint-staged](https://github.com/okonet/lint-staged) 13.x
+
+---
+
+## Project Structure
+
+.
+├── .husky/ # Husky configuration (pre-commit hook)
+├── .vscode/ # VSCode configuration (if any)
+├── node_modules/ # Directory for installed node packages
+├── public/ # Contains static files (favicon, manifest, ...)
+├── src/
+│ ├── apis/ # API call functions (axios)
+│ ├── assets/ # Images, media files, ...
+│ ├── components/ # Shared components
+│ ├── configs/ # Configurations, e.g., axios setup, ...
+│ ├── constants/ # Contains constants, enums, ...
+│ ├── layouts/ # Application's main layouts
+│ ├── lib/ # Libraries, reusable helper functions
+│ ├── routes/ # Application routes (React Router)
+│ ├── store/ # State management (zustand)
+│ ├── utils/ # Utility functions, helper functions
+│ ├── App.tsx # Root component of the application
+│ ├── index.css # Global CSS file (import tailwind)
+│ ├── index.tsx # Entry point for rendering React
+│ └── vite-env.d.ts # Type declarations for Vite
+├── .editorconfig # Code formatting rules for multiple editors
+├── .env # Main environment variables (not committed to repo)
+├── .env.example # Example .env file
+├── .npmrc # npm configuration
+├── .nvmrc # Specifies NodeJS version for the project
+├── .prettierrc # Prettier configuration
+├── eslint.config.js # ESLint configuration
+├── index.html # Root HTML file for Vite
+├── package.json # Project information and configuration
+├── README.md # Documentation and project description
+├── tsconfig.json # TypeScript configuration
+├── vite.config.ts # Vite configuration
+└── yarn.lock / package-lock.json # Lock file for dependencies
+
+## Clone repo:
+
+```bash
+git clone https://github.com/lofadev/react-shadcn-tailwind-boilerplate.git
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Install dependencies:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+cd react-shadcn-tailwind-boilerplate
+npm install
+# or
+yarn install
+```
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+## Create a .env file (if necessary) based on .env.example:
+
+```bash
+cp .env.example .env
+```
+
+## Start the development server:
+
+```bash
+npm run dev
+# or
+yarn dev
+```
+
+## Build the project for production:
+
+```bash
+npm run build
+# or
+yarn build
+```
+
+## Preview the production build:
+
+```bash
+npm run start
+# or
+yarn start
 ```

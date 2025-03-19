@@ -1,6 +1,6 @@
-import { Moon, Sun } from 'lucide-react';
+import { Monitor, Moon, Sun } from 'lucide-react';
 
-import { useTheme } from '@/components/theme-provider';
+import { Theme, useTheme } from '@/components/theme-provider';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -8,6 +8,30 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+
+type Item = {
+  value: Theme;
+  label: string;
+  icon: React.ReactNode;
+};
+
+const items: Item[] = [
+  {
+    value: 'light',
+    label: 'Light',
+    icon: <Sun />,
+  },
+  {
+    value: 'dark',
+    label: 'Dark',
+    icon: <Moon />,
+  },
+  {
+    value: 'system',
+    label: 'System',
+    icon: <Monitor />,
+  },
+];
 
 export function ThemeControl() {
   const { setTheme } = useTheme();
@@ -22,9 +46,12 @@ export function ThemeControl() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme('light')}>Light</DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('dark')}>Dark</DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('system')}>System</DropdownMenuItem>
+        {items.map((item) => (
+          <DropdownMenuItem key={item.value} onClick={() => setTheme(item.value)} className="cursor-pointer">
+            {item.icon}
+            {item.label}
+          </DropdownMenuItem>
+        ))}
       </DropdownMenuContent>
     </DropdownMenu>
   );

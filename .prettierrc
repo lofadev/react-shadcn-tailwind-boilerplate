@@ -9,7 +9,7 @@
   "printWidth": 120,
   "jsxSingleQuote": false,
   "plugins": ["@trivago/prettier-plugin-sort-imports", "prettier-plugin-tailwindcss"],
-  "importOrder": ["^react$", "@/*"],
+  "importOrder": ["^react$", "<THIRD_PARTY_MODULES>", "^@/components/(.*)$", "^@/(.*)$", "^[./]"],
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true
 }
