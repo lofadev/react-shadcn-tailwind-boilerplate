@@ -15,6 +15,7 @@ export const useAuthService = () => {
       setUser(result.data);
       setLocalStorage(LOCAL_STORAGE_KEY.TOKEN, result.data.token);
       setToast({ status: 'SUCCESS', message: result.message });
+
       return result.data;
     } catch (error) {
       handleApiError(error, setToast);
@@ -42,6 +43,7 @@ export const useAuthService = () => {
       setLoading(true);
       const result = await AuthApi.me();
       setUser(result.data);
+
       return result.data;
     } catch (error) {
       handleApiError(error, setToast);

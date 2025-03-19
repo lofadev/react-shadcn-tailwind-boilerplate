@@ -5,7 +5,7 @@ import { UserModel } from '@/types';
 type AuthState = {
   user: UserModel | null;
   loading: boolean;
-  error: any;
+  error: unknown;
 };
 
 type Actions = {

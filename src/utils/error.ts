@@ -9,6 +9,7 @@ export const handleApiError = (error: unknown, setToast: (msg: TToast) => void) 
       status: 'ERROR',
       message: SYSTEM_ERROR.SERVER_ERROR.MESSAGE,
     });
+
     return;
   }
 

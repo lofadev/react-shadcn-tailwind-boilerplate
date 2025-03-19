@@ -18,6 +18,7 @@ const createAxiosInstance = (
       if (token) {
         config.headers.Authorization = `Bearer ${token}`;
       }
+
       return config;
     },
     (error: AxiosError) => Promise.reject(error),
@@ -30,6 +31,7 @@ const createAxiosInstance = (
       if (error.response) {
         return Promise.reject(error.response.data);
       }
+
       return Promise.reject(error);
     },
   );

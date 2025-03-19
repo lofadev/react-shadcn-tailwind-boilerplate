@@ -1,18 +1,18 @@
-import { PropsWithChildren, Suspense, lazy } from 'react';
+import { PropsWithChildren, Suspense } from 'react';
 
 import { Navigate, RouteObject } from 'react-router';
+import { useShallow } from 'zustand/shallow';
 
 import LoadingIndicator from '@/components/loading-indicator';
 
 import { LOCAL_STORAGE_KEY, ROUTE_PATH } from '@/constants';
 import { DefaultLayout } from '@/layouts';
 import { useAuthStore } from '@/store';
-import { UserModel } from '@/types';
 import { getLocalStorage } from '@/utils';
 
 export const PrivateRoute: React.FC<PropsWithChildren> = ({ children }) => {
-  const user = useAuthStore((state: { user: UserModel | null }) => state.user);
-  const error = useAuthStore((state: { error: any }) => state.error);
+  const user = useAuthStore(useShallow((state) => state.user));
+  const error = useAuthStore((state) => state.error);
   const token = getLocalStorage(LOCAL_STORAGE_KEY.TOKEN);
 
   return (

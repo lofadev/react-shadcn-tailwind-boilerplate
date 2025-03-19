@@ -20,6 +20,7 @@ export const ToastMessage = () => {
       const timer = setTimeout(() => {
         setToast(null);
       }, 0);
+
       return () => clearTimeout(timer);
     }
   }, [toast]);
