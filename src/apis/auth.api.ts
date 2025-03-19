@@ -9,7 +9,7 @@ export class AuthApi {
   static me = (): Promise<IResponse<UserModel>> => axiosClient.get(END_POINT.AUTH.ME);
 
   static login = (payload: TLoginPayload): Promise<IResponse<UserModel & { token: string }>> =>
-    axiosClient.post(END_POINT.AUTH.LOGIN, { loginID: payload.username, password: payload.password });
+    axiosClient.post(END_POINT.AUTH.LOGIN, payload);
 
   static logout = (): Promise<IResponse<null>> => axiosClient.post(END_POINT.AUTH.LOGOUT);
 }

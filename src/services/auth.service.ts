@@ -1,8 +1,7 @@
 import { AuthApi } from '@/apis/auth.api';
 import { LOCAL_STORAGE_KEY } from '@/constants';
 import { useAuthStore, useToastStore } from '@/store';
-import { removeLocalStorage, setLocalStorage } from '@/utils';
-import { handleApiError } from '@/utils/error';
+import { handleApiError, removeLocalStorage, setLocalStorage } from '@/utils';
 import { TLoginPayload } from '@/validations/auth.schema';
 
 export const useAuthService = () => {
