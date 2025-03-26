@@ -16,7 +16,7 @@ const AppRoutes = () => {
   const { user } = useAuthStore();
 
   useEffect(() => {
-    const token = getLocalStorage(LOCAL_STORAGE_KEY.TOKEN);
+    const token = getLocalStorage(LOCAL_STORAGE_KEY.ACCESS_TOKEN);
 
     if (token && !user) {
       getMe();

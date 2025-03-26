@@ -1,28 +1,30 @@
-import { PropsWithChildren, Suspense } from 'react';
+import { Suspense } from 'react';
 
-import { Navigate, RouteObject } from 'react-router';
+import { Navigate, RouteObject, useOutlet } from 'react-router';
 import { useShallow } from 'zustand/shallow';
 
 import LoadingIndicator from '@/components/loading-indicator';
 
 import { LOCAL_STORAGE_KEY, ROUTE_PATH } from '@/constants';
-import { DefaultLayout } from '@/layouts';
 import { useAuthStore } from '@/store';
 import { getLocalStorage } from '@/utils';
 
-export const PrivateRoute: React.FC<PropsWithChildren> = ({ children }) => {
+export const PrivateRoute = () => {
   const user = useAuthStore(useShallow((state) => state.user));
   const error = useAuthStore((state) => state.error);
-  const token = getLocalStorage(LOCAL_STORAGE_KEY.TOKEN);
+  const token = getLocalStorage(LOCAL_STORAGE_KEY.ACCESS_TOKEN);
+  const outlet = useOutlet();
 
   return (
     <Suspense fallback={<LoadingIndicator />}>
       {token ? (
         user ? (
-          children
+          outlet
         ) : error ? (
           <Navigate to={ROUTE_PATH.AUTH.LOGIN} replace />
-        ) : null
+        ) : (
+          outlet
+        )
       ) : (
         <Navigate to={ROUTE_PATH.AUTH.LOGIN} replace />
       )}
@@ -32,11 +34,7 @@ export const PrivateRoute: React.FC<PropsWithChildren> = ({ children }) => {
 
 const protectedRoutes: RouteObject[] = [
   {
-    element: (
-      <PrivateRoute>
-        <DefaultLayout />
-      </PrivateRoute>
-    ),
+    element: <PrivateRoute />,
     children: [],
   },
 ];
