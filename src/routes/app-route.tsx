@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { useRoutes } from 'react-router';
+import { useRoutes } from 'react-router-dom';
 
 import { LOCAL_STORAGE_KEY } from '@/constants';
 import { useAuthService } from '@/services/auth.service';

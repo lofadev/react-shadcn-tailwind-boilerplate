@@ -3,7 +3,7 @@ import type React from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Loader2 } from 'lucide-react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { z } from 'zod';
 
 import InputPassword from '@/components/input-password';

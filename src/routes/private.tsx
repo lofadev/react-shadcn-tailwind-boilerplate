@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 
-import { Navigate, RouteObject, useOutlet } from 'react-router';
+import { Navigate, RouteObject, useOutlet } from 'react-router-dom';
 import { useShallow } from 'zustand/shallow';
 
 import LoadingIndicator from '@/components/loading-indicator';

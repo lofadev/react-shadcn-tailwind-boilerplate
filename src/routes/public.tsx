@@ -1,6 +1,6 @@
 import React, { PropsWithChildren, Suspense, lazy, useMemo } from 'react';
 
-import { Navigate, RouteObject, useLocation } from 'react-router';
+import { Navigate, RouteObject, useLocation } from 'react-router-dom';
 
 import LoadingIndicator from '@/components/loading-indicator';
 

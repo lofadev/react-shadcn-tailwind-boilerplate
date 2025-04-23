@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 
-import { BrowserRouter } from 'react-router';
+import { BrowserRouter } from 'react-router-dom';
 
 import { ThemeProvider } from '@/components/theme-provider';
 

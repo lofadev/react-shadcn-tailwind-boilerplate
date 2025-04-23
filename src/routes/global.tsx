@@ -1,6 +1,6 @@
 import { lazy } from 'react';
 
-import { RouteObject } from 'react-router';
+import { RouteObject } from 'react-router-dom';
 
 import { ROUTE_PATH } from '@/constants';
 import { DefaultLayout } from '@/layouts';
