@@ -1,14 +1,15 @@
+import { toast } from 'sonner';
+
 import { axiosClient } from '@/configs/axios';
 import { LOCAL_STORAGE_KEY } from '@/constants';
 import { END_POINT } from '@/constants/endpoint';
-import { useAuthStore, useToastStore } from '@/store';
+import { useAuthStore } from '@/store';
 import { IResponse, IToken, UserModel } from '@/types';
 import { removeLocalStorage, setLocalStorage } from '@/utils';
 import { TLoginPayload } from '@/validations/auth.schema';
 
 export const useAuthService = () => {
   const { setUser, setLoading } = useAuthStore();
-  const { setToast } = useToastStore();
 
   const login = async (payload: TLoginPayload) => {
     try {
@@ -18,7 +19,7 @@ export const useAuthService = () => {
       setUser(userData);
       setLocalStorage(LOCAL_STORAGE_KEY.ACCESS_TOKEN, access_token);
       setLocalStorage(LOCAL_STORAGE_KEY.REFRESH_TOKEN, refresh_token);
-      setToast({ status: 'SUCCESS', message: result.message });
+      toast.success(result.message);
     } finally {
       setLoading(false);
     }

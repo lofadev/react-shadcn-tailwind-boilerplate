@@ -4,37 +4,33 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Loader2 } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-import { z } from 'zod';
 
+import FormItem from '@/components/custom/form-item';
 import InputPassword from '@/components/input-password';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { Form } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 
 import { ROUTE_PATH } from '@/constants';
 import { cn } from '@/lib/utils';
 import { useAuthService } from '@/services/auth.service';
 import { useAuthStore } from '@/store';
-
-const formSchema = z.object({
-  username: z.string().min(1, { message: 'Username is required' }),
-  password: z.string().min(1, { message: 'Password is required' }),
-});
+import { TLoginPayload, loginSchema } from '@/validations/auth.schema';
 
 export function LoginForm({ className, ...props }: React.ComponentPropsWithoutRef<'div'>) {
   const { loading } = useAuthStore();
   const { login } = useAuthService();
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<TLoginPayload>({
+    resolver: zodResolver(loginSchema),
     defaultValues: {
       username: '',
       password: '',
     },
   });
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+  const onSubmit = async (values: TLoginPayload) => {
     await login(values);
   };
 
@@ -48,32 +44,12 @@ export function LoginForm({ className, ...props }: React.ComponentPropsWithoutRe
         <CardContent>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} noValidate className="space-y-6">
-              <FormField
-                control={form.control}
-                name="username"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Username</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Type your username here" autoFocus {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="password"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Password</FormLabel>
-                    <FormControl>
-                      <InputPassword placeholder="Type your password here" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+              <FormItem name="username" label="Username" required>
+                {(field) => <Input placeholder="Type your username here" autoFocus {...field} />}
+              </FormItem>
+              <FormItem name="password" label="Password" required>
+                {(field) => <InputPassword placeholder="Type your password here" {...field} />}
+              </FormItem>
 
               <div className="flex justify-end">
                 <Link

@@ -1,5 +1,6 @@
 import pluginJs from '@eslint/js';
 import pluginReact from 'eslint-plugin-react';
+import unusedImports from 'eslint-plugin-unused-imports';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
@@ -11,9 +12,14 @@ export default [
   ...tseslint.configs.recommended,
   pluginReact.configs.flat.recommended,
   {
+    plugins: {
+      'unused-imports': unusedImports,
+    },
+  },
+  {
     rules: {
       'react/react-in-jsx-scope': 'off',
-      'no-console': 'off',
+      'no-console': 'error',
       'newline-before-return': 'error',
       '@typescript-eslint/no-unused-vars': 'warn',
       '@typescript-eslint/no-empty-interface': 'off',
@@ -35,6 +41,17 @@ export default [
       'no-restricted-imports': 'error',
       'no-empty': ['error', { allowEmptyCatch: true }],
       eqeqeq: 'off',
+      'no-unused-vars': 'off',
+      'unused-imports/no-unused-imports': 'error',
+      'unused-imports/no-unused-vars': [
+        'warn',
+        {
+          vars: 'all',
+          varsIgnorePattern: '^_',
+          args: 'after-used',
+          argsIgnorePattern: '^_',
+        },
+      ],
     },
   },
 ];

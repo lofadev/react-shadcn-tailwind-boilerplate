@@ -4,8 +4,8 @@ import { BrowserRouter } from 'react-router-dom';
 
 import { ThemeProvider } from '@/components/theme-provider';
 
+import ToastMessage from './components/custom/toast-message';
 import LoadingIndicator from './components/loading-indicator';
-import { ToastMessage } from './components/toast-message';
 import AppRoutes from './routes/app-route';
 
 function App() {

@@ -77,6 +77,12 @@ This document describes the structure of the project directory and the purpose o
 git clone https://github.com/lofadev/react-shadcn-tailwind-boilerplate.git
 ```
 
+## Node version:
+
+```json
+>= 22.x
+```
+
 ## Install dependencies:
 
 ```bash
