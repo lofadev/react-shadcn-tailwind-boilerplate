@@ -1,40 +1,48 @@
-import { Suspense } from 'react';
+import React, { PropsWithChildren, Suspense } from 'react';
 
-import { Navigate, RouteObject, useOutlet } from 'react-router-dom';
+import { Navigate, RouteObject, useLocation } from 'react-router-dom';
 import { useShallow } from 'zustand/shallow';
 
 import LoadingIndicator from '@/components/loading-indicator';
 
 import { LOCAL_STORAGE_KEY, ROUTE_PATH } from '@/constants';
+import { DefaultLayout } from '@/layouts';
 import { useAuthStore } from '@/store';
 import { getLocalStorage } from '@/utils';
 
-export const PrivateRoute = () => {
+export const PrivateRoute = React.memo(({ children }: PropsWithChildren) => {
   const user = useAuthStore(useShallow((state) => state.user));
   const error = useAuthStore((state) => state.error);
   const token = getLocalStorage(LOCAL_STORAGE_KEY.ACCESS_TOKEN);
-  const outlet = useOutlet();
+
+  const location = useLocation();
 
   return (
     <Suspense fallback={<LoadingIndicator />}>
       {token ? (
         user ? (
-          outlet
+          children
         ) : error ? (
-          <Navigate to={ROUTE_PATH.AUTH.LOGIN} replace />
+          <Navigate to={ROUTE_PATH.AUTH.LOGIN + '?returnUrl=' + location.pathname} replace />
         ) : (
-          outlet
+          children
         )
       ) : (
-        <Navigate to={ROUTE_PATH.AUTH.LOGIN} replace />
+        <Navigate to={ROUTE_PATH.AUTH.LOGIN + '?returnUrl=' + location.pathname} replace />
       )}
     </Suspense>
   );
-};
+});
+
+PrivateRoute.displayName = 'PrivateRoute';
 
 const protectedRoutes: RouteObject[] = [
   {
-    element: <PrivateRoute />,
+    element: (
+      <PrivateRoute>
+        <DefaultLayout />
+      </PrivateRoute>
+    ),
     children: [],
   },
 ];

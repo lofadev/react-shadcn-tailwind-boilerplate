@@ -1,6 +1,6 @@
 import React, { PropsWithChildren, Suspense, lazy, useMemo } from 'react';
 
-import { Navigate, RouteObject, useLocation } from 'react-router-dom';
+import { Navigate, RouteObject, useSearchParams } from 'react-router-dom';
 
 import LoadingIndicator from '@/components/loading-indicator';
 
@@ -12,14 +12,14 @@ import { UserModel } from '@/types';
 const Login = lazy(() => import('@/pages/auth/login'));
 const Register = lazy(() => import('@/pages/auth/register'));
 
-const PublicRoute: React.FC<PropsWithChildren> = React.memo(({ children }) => {
+const PublicRoute = React.memo(({ children }: PropsWithChildren) => {
   const user = useAuthStore((state: { user: UserModel | null }) => state.user);
 
-  const location = useLocation();
+  const [searchParams] = useSearchParams();
 
-  const pathname = useMemo(() => location.state?.pathname ?? ROUTE_PATH.HOME, [location.state?.pathname]);
+  const returnUrl = useMemo(() => searchParams.get('returnUrl') ?? ROUTE_PATH.HOME, [searchParams]);
 
-  return <Suspense fallback={<LoadingIndicator />}>{user ? <Navigate to={pathname} replace /> : children}</Suspense>;
+  return <Suspense fallback={<LoadingIndicator />}>{user ? <Navigate to={returnUrl} replace /> : children}</Suspense>;
 });
 
 PublicRoute.displayName = 'PublicRoute';
