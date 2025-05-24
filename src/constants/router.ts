@@ -6,5 +6,6 @@ export const ROUTE_PATH = {
     UNAUTHORIZED: '/unauthorized',
     FORGOT_PASSWORD: '/forgot-password',
   },
+  ACCESS_DENINED: '/access-denied',
   NOTFOUND: '*',
 };

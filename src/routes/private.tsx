@@ -10,7 +10,6 @@ import { getLocalStorage } from '@/utils';
 
 export const PrivateRoute = React.memo(({ children }: PropsWithChildren) => {
   const user = useAuthStore(useShallow((state) => state.user));
-  const error = useAuthStore((state) => state.error);
   const token = getLocalStorage(LOCAL_STORAGE_KEY.ACCESS_TOKEN);
 
   const location = useLocation();
@@ -18,10 +17,8 @@ export const PrivateRoute = React.memo(({ children }: PropsWithChildren) => {
   return token ? (
     user ? (
       children
-    ) : error ? (
-      <Navigate to={ROUTE_PATH.AUTH.LOGIN + '?returnUrl=' + location.pathname} replace />
     ) : (
-      children
+      <Navigate to={ROUTE_PATH.AUTH.LOGIN + '?returnUrl=' + location.pathname} replace />
     )
   ) : (
     <Navigate to={ROUTE_PATH.AUTH.LOGIN + '?returnUrl=' + location.pathname} replace />
