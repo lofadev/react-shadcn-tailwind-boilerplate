@@ -1,21 +1,31 @@
-import { Suspense } from 'react';
-
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { BrowserRouter } from 'react-router-dom';
 
 import { ThemeProvider } from '@/components/theme-provider';
 
 import ToastMessage from './components/custom/toast-message';
-import LoadingIndicator from './components/loading-indicator';
 import AppRoutes from './routes/app-route';
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      retry: false,
+    },
+    mutations: {
+      retry: false,
+    },
+  },
+});
 
 function App() {
   return (
     <ThemeProvider defaultTheme="system" storageKey="theme">
       <ToastMessage />
       <BrowserRouter>
-        <Suspense fallback={<LoadingIndicator />}>
+        <QueryClientProvider client={queryClient}>
           <AppRoutes />
-        </Suspense>
+        </QueryClientProvider>
       </BrowserRouter>
     </ThemeProvider>
   );

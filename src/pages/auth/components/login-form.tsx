@@ -1,6 +1,7 @@
 import type React from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation } from '@tanstack/react-query';
 import { Loader2 } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
@@ -15,11 +16,9 @@ import { Input } from '@/components/ui/input';
 import { ROUTE_PATH } from '@/constants';
 import { cn } from '@/lib/utils';
 import { useAuthService } from '@/services/auth.service';
-import { useAuthStore } from '@/store';
 import { TLoginPayload, loginSchema } from '@/validations/auth.schema';
 
 export function LoginForm({ className, ...props }: React.ComponentPropsWithoutRef<'div'>) {
-  const { loading } = useAuthStore();
   const { login } = useAuthService();
 
   const form = useForm<TLoginPayload>({
@@ -30,8 +29,12 @@ export function LoginForm({ className, ...props }: React.ComponentPropsWithoutRe
     },
   });
 
-  const onSubmit = async (values: TLoginPayload) => {
-    await login(values);
+  const { mutate, isPending } = useMutation({
+    mutationFn: (values: TLoginPayload) => login(values),
+  });
+
+  const onSubmit = (values: TLoginPayload) => {
+    mutate(values);
   };
 
   return (
@@ -59,9 +62,9 @@ export function LoginForm({ className, ...props }: React.ComponentPropsWithoutRe
                   Forgot your password?
                 </Link>
               </div>
-              <Button type="submit" className="relative w-full" disabled={loading}>
+              <Button type="submit" className="relative w-full" disabled={isPending}>
                 Login
-                {loading && <Loader2 className="animate-spin" />}
+                {isPending && <Loader2 className="animate-spin" />}
               </Button>
             </form>
           </Form>
