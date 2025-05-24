@@ -1,8 +1,7 @@
 import axios, { AxiosError, AxiosInstance, AxiosResponse, CreateAxiosDefaults } from 'axios';
 import { toast } from 'sonner';
 
-import { LOCAL_STORAGE_KEY, SYSTEM_ERROR } from '@/constants';
-import { END_POINT } from '@/constants/endpoint';
+import { END_POINT, LOCAL_STORAGE_KEY, SYSTEM_ERROR } from '@/constants';
 import { IResponse } from '@/types';
 import { getLocalStorage, removeLocalStorage, setLocalStorage } from '@/utils';
 
@@ -12,7 +11,7 @@ let refreshTokenPromise: Promise<void> | null = null;
 
 const createAxiosInstance = (
   baseURL: string,
-  configs: CreateAxiosDefaults = { timeout: 15000, timeoutErrorMessage: SYSTEM_ERROR.TIMEOUT_ERROR.MESSAGE },
+  configs: CreateAxiosDefaults = { timeout: 10000, timeoutErrorMessage: SYSTEM_ERROR.TIMEOUT_ERROR.MESSAGE },
 ): AxiosInstance => {
   const instance = axios.create({ baseURL, ...configs });
 
@@ -34,6 +33,18 @@ const createAxiosInstance = (
     (response: AxiosResponse) => response.data,
     (error: AxiosError) => {
       const originalRequest = error.config;
+
+      if (error.code === 'ECONNABORTED' || error.message === SYSTEM_ERROR.TIMEOUT_ERROR.MESSAGE) {
+        toast.error(SYSTEM_ERROR.TIMEOUT_ERROR.MESSAGE);
+
+        return Promise.reject(error);
+      }
+
+      if (!error.response) {
+        toast.error(SYSTEM_ERROR.NETWORK_ERROR.MESSAGE);
+
+        return Promise.reject(error);
+      }
 
       if (error.response?.status === 410 && originalRequest) {
         if (!refreshTokenPromise) {

@@ -1,9 +1,7 @@
-import React, { PropsWithChildren, Suspense } from 'react';
+import React, { PropsWithChildren } from 'react';
 
 import { Navigate, RouteObject, useLocation } from 'react-router-dom';
 import { useShallow } from 'zustand/shallow';
-
-import LoadingIndicator from '@/components/loading-indicator';
 
 import { LOCAL_STORAGE_KEY, ROUTE_PATH } from '@/constants';
 import { DefaultLayout } from '@/layouts';
@@ -17,20 +15,16 @@ export const PrivateRoute = React.memo(({ children }: PropsWithChildren) => {
 
   const location = useLocation();
 
-  return (
-    <Suspense fallback={<LoadingIndicator />}>
-      {token ? (
-        user ? (
-          children
-        ) : error ? (
-          <Navigate to={ROUTE_PATH.AUTH.LOGIN + '?returnUrl=' + location.pathname} replace />
-        ) : (
-          children
-        )
-      ) : (
-        <Navigate to={ROUTE_PATH.AUTH.LOGIN + '?returnUrl=' + location.pathname} replace />
-      )}
-    </Suspense>
+  return token ? (
+    user ? (
+      children
+    ) : error ? (
+      <Navigate to={ROUTE_PATH.AUTH.LOGIN + '?returnUrl=' + location.pathname} replace />
+    ) : (
+      children
+    )
+  ) : (
+    <Navigate to={ROUTE_PATH.AUTH.LOGIN + '?returnUrl=' + location.pathname} replace />
   );
 });
 

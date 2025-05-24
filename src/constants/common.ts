@@ -1,7 +1,7 @@
 export const LOCAL_STORAGE_KEY = {
   LANGUAGE: 'language',
-  ACCESS_TOKEN: 'access_token',
-  REFRESH_TOKEN: 'refresh_token',
+  ACCESS_TOKEN: 'accessToken',
+  REFRESH_TOKEN: 'refreshToken',
   THEME: 'theme',
 };
 
