@@ -6,7 +6,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 type arrayFormat = queryString.ParseOptions['arrayFormat'];
 
-const defaultArrayFormat: arrayFormat = 'bracket';
+const defaultArrayFormat: arrayFormat = 'comma';
 
 const defaultOptions: queryString.ParseOptions = {
   arrayFormat: defaultArrayFormat,

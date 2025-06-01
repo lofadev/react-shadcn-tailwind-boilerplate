@@ -11,7 +11,7 @@ type FormItemProps<T extends FieldValues, P extends Path<T>> = {
   name: P;
   label?: string;
   required?: boolean;
-  children: (field: ControllerRenderProps<T, P>) => ReactElement;
+  children: (_field: ControllerRenderProps<T, P>) => ReactElement;
   direction?: 'row' | 'col';
   className?: string;
   labelStyles?: string;

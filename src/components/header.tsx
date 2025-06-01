@@ -7,7 +7,7 @@ import { ThemeControl } from './theme-control';
 
 const Header = () => {
   return (
-    <header className="border-grid bg-background/95 supports-[backdrop-filter]:bg-background/60 fixed top-0 z-50 w-full backdrop-blur">
+    <header className="border-grid bg-background/95 supports-[backdrop-filter]:bg-background/60 fixed top-0 z-50 w-screen backdrop-blur">
       <PageWrapper>
         <div className="flex h-14 items-center justify-between border-b">
           <h1 className="text-2xl font-bold">

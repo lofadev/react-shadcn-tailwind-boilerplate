@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react';
+import React, { PropsWithChildren, useMemo } from 'react';
 
 import { Navigate, RouteObject, useLocation } from 'react-router-dom';
 import { useShallow } from 'zustand/shallow';
@@ -13,16 +13,13 @@ export const PrivateRoute = React.memo(({ children }: PropsWithChildren) => {
   const token = getLocalStorage(LOCAL_STORAGE_KEY.ACCESS_TOKEN);
 
   const location = useLocation();
+  const returnUrl = useMemo(() => ROUTE_PATH.AUTH.LOGIN + '?returnUrl=' + location.pathname, [location.pathname]);
 
-  return token ? (
-    user ? (
-      children
-    ) : (
-      <Navigate to={ROUTE_PATH.AUTH.LOGIN + '?returnUrl=' + location.pathname} replace />
-    )
-  ) : (
-    <Navigate to={ROUTE_PATH.AUTH.LOGIN + '?returnUrl=' + location.pathname} replace />
-  );
+  if (!token || !user) {
+    return <Navigate to={returnUrl} replace />;
+  }
+
+  return children;
 });
 
 PrivateRoute.displayName = 'PrivateRoute';

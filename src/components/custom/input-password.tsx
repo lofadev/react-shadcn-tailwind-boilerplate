@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { EyeIcon, EyeOffIcon } from 'lucide-react';
 
-import { Input } from './ui/input';
+import { Input } from '../ui/input';
 
 const InputPassword = (props: React.ComponentProps<'input'>) => {
   const [showPassword, setShowPassword] = useState(false);

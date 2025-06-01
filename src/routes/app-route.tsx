@@ -33,7 +33,7 @@ const AppRoutes = () => {
     initAuth();
   }, []);
 
-  const routing = useRoutes([...publicRoutes, ...protectedRoutes, ...globalRoutes]); // ✅ luôn gọi hook
+  const routing = useRoutes([...publicRoutes, ...protectedRoutes, ...globalRoutes]);
 
   if (!initAuthState) {
     return <LoadingIndicator />;

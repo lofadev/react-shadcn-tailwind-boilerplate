@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
 import FormItem from '@/components/custom/form-item';
-import InputPassword from '@/components/input-password';
+import InputPassword from '@/components/custom/input-password';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Form } from '@/components/ui/form';
