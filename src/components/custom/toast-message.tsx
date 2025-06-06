@@ -1,7 +1,7 @@
 import { CircleAlert, CircleCheck, Info, TriangleAlert } from 'lucide-react';
-import { useTheme } from 'next-themes';
 import { ToasterProps } from 'sonner';
 
+import { useTheme } from '../theme-provider';
 import { Toaster } from '../ui/sonner';
 
 const ToastMessage = (props: ToasterProps) => {

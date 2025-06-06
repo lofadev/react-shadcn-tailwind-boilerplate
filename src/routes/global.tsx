@@ -3,7 +3,8 @@ import { lazy } from 'react';
 import { RouteObject } from 'react-router-dom';
 
 import { ROUTE_PATH } from '@/constants';
-import { DefaultLayout } from '@/layouts';
+
+const DefaultLayout = lazy(() => import('@/layouts/default'));
 
 const NotFound = lazy(() => import('@/pages/not-found'));
 const Home = lazy(() => import('@/pages/home'));

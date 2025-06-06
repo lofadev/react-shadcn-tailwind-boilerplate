@@ -4,9 +4,9 @@ import { Navigate, RouteObject, useSearchParams } from 'react-router-dom';
 import { useShallow } from 'zustand/shallow';
 
 import { ROUTE_PATH } from '@/constants';
-import { AuthLayout } from '@/layouts';
 import { useAuthStore } from '@/store';
 
+const AuthLayout = lazy(() => import('@/layouts/auth'));
 const Login = lazy(() => import('@/pages/auth/login'));
 const Register = lazy(() => import('@/pages/auth/register'));
 

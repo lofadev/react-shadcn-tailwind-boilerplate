@@ -2,7 +2,7 @@ import { useOutlet } from 'react-router-dom';
 
 import { ThemeControl } from '@/components/theme-control';
 
-export const AuthLayout = () => {
+const AuthLayout = () => {
   const outlet = useOutlet();
 
   return (
@@ -14,3 +14,5 @@ export const AuthLayout = () => {
     </>
   );
 };
+
+export default AuthLayout;

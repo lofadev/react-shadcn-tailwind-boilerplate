@@ -5,7 +5,7 @@ import { useOutlet } from 'react-router-dom';
 import Footer from '@/components/footer';
 import Header from '@/components/header';
 
-export const DefaultLayout: React.FC<PropsWithChildren> = () => {
+const DefaultLayout: React.FC<PropsWithChildren> = () => {
   const outlet = useOutlet();
 
   return (
@@ -16,3 +16,5 @@ export const DefaultLayout: React.FC<PropsWithChildren> = () => {
     </div>
   );
 };
+
+export default DefaultLayout;
