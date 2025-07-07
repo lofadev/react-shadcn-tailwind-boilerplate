@@ -7,7 +7,7 @@ export function getLocalStorage(key: string) {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function setLocalStorage(key: string, value: any) {
-  localStorage.setItem(key, JSON.stringify(value));
+  localStorage.setItem(key, typeof value === 'object' ? JSON.stringify(value) : value);
 }
 
 export function removeLocalStorage(key: string) {
