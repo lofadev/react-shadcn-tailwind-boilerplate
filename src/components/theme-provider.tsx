@@ -1,12 +1,10 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import { PropsWithChildren, createContext, useContext, useEffect, useState } from 'react';
+
+import { LOCAL_STORAGE_KEY, THEME_TYPE } from '@/constants/common';
+import { setLocalStorage } from '@/utils';
+import { checkValidTheme } from '@/utils/theme';
 
 export type Theme = 'dark' | 'light' | 'system';
-
-type ThemeProviderProps = {
-  children: React.ReactNode;
-  defaultTheme?: Theme;
-  storageKey?: string;
-};
 
 type ThemeProviderState = {
   theme: Theme;
@@ -14,21 +12,17 @@ type ThemeProviderState = {
 };
 
 const initialState: ThemeProviderState = {
-  theme: 'system',
+  theme: THEME_TYPE.SYSTEM,
   setTheme: () => null,
 };
 
 const ThemeProviderContext = createContext<ThemeProviderState>(initialState);
 
-export function ThemeProvider({
-  children,
-  defaultTheme = 'system',
-  storageKey = 'theme',
-  ...props
-}: ThemeProviderProps) {
-  const [theme, setTheme] = useState<Theme>(() => (localStorage.getItem(storageKey) as Theme) || defaultTheme);
+export function ThemeProvider({ children }: PropsWithChildren) {
+  const [theme, setTheme] = useState<Theme>(() => checkValidTheme());
 
   useEffect(() => {
+    setLocalStorage(LOCAL_STORAGE_KEY.THEME, theme);
     const root = window.document.documentElement;
 
     root.classList.remove('light', 'dark');
@@ -47,16 +41,12 @@ export function ThemeProvider({
   const value = {
     theme,
     setTheme: (theme: Theme) => {
-      localStorage.setItem(storageKey, theme);
+      setLocalStorage(LOCAL_STORAGE_KEY.THEME, theme);
       setTheme(theme);
     },
   };
 
-  return (
-    <ThemeProviderContext.Provider {...props} value={value}>
-      {children}
-    </ThemeProviderContext.Provider>
-  );
+  return <ThemeProviderContext.Provider value={value}>{children}</ThemeProviderContext.Provider>;
 }
 
 export const useTheme = () => {

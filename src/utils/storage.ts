@@ -1,8 +1,13 @@
 export function getLocalStorage(key: string) {
   const storedValue = localStorage.getItem(key);
-  if (storedValue) return JSON.parse(storedValue);
 
-  return null;
+  if (!storedValue) return null;
+
+  if (typeof storedValue === 'string') {
+    return storedValue;
+  }
+
+  return JSON.parse(storedValue);
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

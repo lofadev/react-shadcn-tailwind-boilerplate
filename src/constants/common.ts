@@ -1,3 +1,5 @@
+import { Theme } from '@/components/theme-provider';
+
 export const LOCAL_STORAGE_KEY = {
   LANGUAGE: 'language',
   ACCESS_TOKEN: 'accessToken',
@@ -20,4 +22,10 @@ export const SYSTEM_ERROR = {
     STATUS: 'Request Timeout',
     MESSAGE: 'The request has timed out',
   },
+};
+
+export const THEME_TYPE: Record<string, Theme> = {
+  LIGHT: 'light',
+  DARK: 'dark',
+  SYSTEM: 'system',
 };
