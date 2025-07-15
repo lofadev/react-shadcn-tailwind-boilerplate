@@ -6,19 +6,18 @@ import { cn } from '@/lib/utils';
 
 import { FormControl, FormField, FormItem as FormItemUI, FormLabel, FormMessage } from '../ui/form';
 
-type FormItemProps<T extends FieldValues, P extends Path<T>> = {
+type FormItemProps<T extends FieldValues> = {
   control?: Control<T>;
-  name: P;
+  name: Path<T>;
   label?: string;
   required?: boolean;
-  children: (_field: ControllerRenderProps<T, P>) => ReactElement;
+  children: (_field: ControllerRenderProps<T, Path<T>>) => ReactElement;
   direction?: 'row' | 'col';
   className?: string;
   labelStyles?: string;
-  showErrorPopup?: boolean;
 };
 
-const FormItem = <T extends FieldValues, P extends Path<T>>({
+const FormItem = <T extends FieldValues>({
   name,
   label,
   required,
@@ -26,12 +25,13 @@ const FormItem = <T extends FieldValues, P extends Path<T>>({
   direction = 'col',
   className,
   labelStyles,
-}: FormItemProps<T, P>) => {
-  const { control } = useFormContext<T>();
+  control,
+}: FormItemProps<T>) => {
+  const { control: controlContext } = useFormContext<T>();
 
   return (
     <FormField
-      control={control}
+      control={controlContext ?? control}
       name={name}
       render={({ field }) => (
         <FormItemUI
