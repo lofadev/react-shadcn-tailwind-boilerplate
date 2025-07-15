@@ -24,7 +24,7 @@ export const SYSTEM_ERROR = {
   },
 };
 
-export const THEME_TYPE: Record<string, Theme> = {
+export const THEME_TYPE: Record<'LIGHT' | 'DARK' | 'SYSTEM', Theme> = {
   LIGHT: 'light',
   DARK: 'dark',
   SYSTEM: 'system',
